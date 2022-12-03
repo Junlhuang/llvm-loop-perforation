@@ -131,7 +131,7 @@ namespace {
     void handleLoop(Function &F, Loop *L, int &NumLoops) {
       if (isLoopPerforable(L)) {
         NumLoops++;
-        j[F.getParent()->getName()][F.getName()][StringifyLoop(L)] = {};
+        j[string(F.getParent()->getName())][string(F.getName())][StringifyLoop(L)] = {};
       }
       // still handle subloops of non-perforable loops
       for (Loop *SubLoop : L->getSubLoops()) {
@@ -181,8 +181,8 @@ namespace {
       // determined to be perforable and were inserted into
       // loop-info.json by the info pass
       if (!j.contains(F->getParent()->getName()) ||
-        !j[F->getParent()->getName()].contains(F->getName()) ||
-        !j[F->getParent()->getName()][F->getName()].contains(StringifyLoop(L)))
+        !j[string(F->getParent()->getName())].contains(string(F->getName())) ||
+        !j[string(F->getParent()->getName())][string(F->getName())].contains(StringifyLoop(L)))
         return false;
 
       // Find the canonical induction variable for this loop
@@ -207,7 +207,7 @@ namespace {
 
         int LoopRate = 1;
         if (!j.empty()) {
-          LoopRate = j[F->getParent()->getName()][F->getName()][StringifyLoop(L)];
+          LoopRate = j[string(F->getParent()->getName())][string(F->getName())][StringifyLoop(L)];
         }
         Type *ConstType = Op->getType();
         Constant *NewInc = ConstantInt::get(ConstType, LoopRate /*value*/, true /*issigned*/);
