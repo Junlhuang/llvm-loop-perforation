@@ -4,6 +4,13 @@ An LLVM pass that mangles your loops, on purpose! More background and detail in 
 
 We use LLVM 9.0.
 
+First create the build directory of and run cmake: 
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ cd ..
+
 To build the LLVM passes:
 
     $ make pass
