@@ -80,6 +80,7 @@ def plot_frontier(data, args) :
 	ax.axes.set_title(args.target.split('/')[-1]);
 
 	# ax.axes.set_xlim([-0.1, ax.axes.get_xlim()[1]])
+	times = times[times < 1E308]
 	x_step = np.around(times.max()/5, -int(np.ceil(np.log10(times.max()))-2) )
 	# if (times.max()
 
@@ -127,7 +128,7 @@ if __name__ == '__main__':
 	parser.add_argument('command', help="The sub plot command: of [frontier]", nargs='+')
 	# parser.add_argument('target', nargs='?', default='tests/matrix_multiply')
 	parser.add_argument('--show', action='store_true', help="")
-	parser.add_argument('--target', help="", required=False, default=None)
+	parser.add_argument('--target', help="", required=False, default='')
 	parser.add_argument('--acc-measure', help="accuracy measure", required=False, default=None)
 
 	args = parser.parse_args()
